@@ -8,7 +8,7 @@ app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
 //Routes
-
+app.use('/dist',express.static(path.join(__dirname, '../dist')));
 //create a task
  app.post("/todos", async(req,res) => {
   try {
@@ -26,12 +26,12 @@ app.use(express.urlencoded({ extended: true }));
  app.get("/todos", async(req,res) => {
   try {
     const allData = await pool.query("SELECT * FROM todo")
-    res.status(200).json(allData.rows)
+    res.json(allData.rows)
   } catch (err) {
     console.error(err.message)
   }
  })
- //get a todo
+//get a todo
 app.get("/todos/:id", async(req,res) => {
   try {
     const { id } = req.params;
@@ -39,10 +39,20 @@ app.get("/todos/:id", async(req,res) => {
     res.json(todo.rows[0])
   } catch (err) {
     console.error(err.message)
-  }
+    }
+})
+ //delete a todo
+app.delete("/todos/:id", async(req,res) => {
+  try {
+    const { id } = req.params;
+    const deletetodo = await pool.query("DELETE FROM todo WHERE todo_id = $1", [id])
+    res.json("Todo was deleted")
+  } catch (err) {
+    console.error(err.message)
+    }
 })
 
-app.use('/dist',express.static(path.join(__dirname, '../dist')));
+
 // serve index.html on the route '/'
 app.get('/', (req, res) => {
   return res.status(200).sendFile(path.join(__dirname, '../client/index.html'));

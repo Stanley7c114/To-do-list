@@ -1,12 +1,8 @@
 import React, { Component } from "react";
-class ListHeader extends Component {
-  render({listName}){
-    return (
-      <div>
-        {listName}
-      </div>
-    );
-  }
+const EditTodo = () => {
+  return (
+    <div>hello</div>
+  )
 }
 
-export default ListHeader;
+export default EditTodo;

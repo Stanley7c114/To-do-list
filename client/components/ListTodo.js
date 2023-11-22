@@ -1,6 +1,20 @@
 import React, { Fragment, useState, useEffect } from "react";
 const ListTodo = () => {
   const [todos, setTodos] = useState([]);
+
+  //delete todos
+  const deleteTodo = async id => {
+    try {
+      const deleteTodo = await fetch(`http://localhost:3000/todos/${id}`, {
+        method: "DELETE",
+      });
+      setTodos(todos.filter((todo) => todo.todo_id !== id));
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
+  //get all todos
   const getTodo = async () => {
     try {
       const response = await fetch("http://localhost:3000/todos");
@@ -14,7 +28,7 @@ const ListTodo = () => {
   useEffect(() => {
     getTodo();
   }, []);
-  console.log(todos)
+  console.log(todos);
   return (
     <Fragment>
       {" "}
@@ -22,8 +36,7 @@ const ListTodo = () => {
         <thead>
           <tr>
             <th>Description</th>
-            <th>Edit</th>
-            <th>Done</th>
+            <td>Done</td>
           </tr>
         </thead>
         {/* <tr>
@@ -32,13 +45,14 @@ const ListTodo = () => {
         <td>john@example.com</td>
       </tr>*/}
         <tbody>
-            {todos.map(todo => (
-                <tr>
-                    <td>{todo.description}</td>
-                    <td>Edit</td>
-                    <td>delete</td>
-                </tr>
-            ))}
+          {todos.map((todo) => (
+            <tr key={todo.todo_id}>
+              <td>{todo.description}</td>
+              <th>
+                <button onClick={() => deleteTodo(todo.todo_id)}>Delete</button>
+              </th>
+            </tr>
+          ))}
         </tbody>
       </table>
     </Fragment>

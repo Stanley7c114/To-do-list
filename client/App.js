@@ -8,8 +8,8 @@ function App(){
   return (
     <Fragment>
       <div className="container">
-      <InputTodo />
-      <ListTodo />
+      <InputTodo id="inputTodo"/>
+      <ListTodo id="ListTodo"/>
       </div>
     </Fragment>
   )
