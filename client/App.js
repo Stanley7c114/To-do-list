@@ -1,5 +1,4 @@
 import React, { Fragment } from "react";
-
 //components
 import InputTodo from "./components/InputTodo";
 import ListTodo from "./components/ListTodo";

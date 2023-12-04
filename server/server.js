@@ -7,8 +7,13 @@ const cors = require("cors");
 app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
-//Routes
-app.use('/dist',express.static(path.join(__dirname, '../dist')));
+//Uncomment this when using port 3000 with production mode
+// app.use('/dist',express.static(path.join(__dirname, '../dist')));
+// app.get('*', (req, res,next) => {
+  // res.sendFile(path.join(__dirname, '../dist','index.html'));
+// });
+
+// Routes
 //create a task
  app.post("/todos", async(req,res) => {
   try {
@@ -57,8 +62,6 @@ app.delete("/todos/:id", async(req,res) => {
 app.get('/', (req, res) => {
   return res.status(200).sendFile(path.join(__dirname, '../client/index.html'));
 });
-
-app.listen(3000, () => {
-    console.log(`Server listening on port: 3000`);
-  });
+const PORT = process.env.PORT || 3000
+app.listen(PORT, () => console.log(`Server listening on port: ${PORT}`));
   

@@ -18,13 +18,14 @@ const InputTodo = () => {
   };
   return (
     <Fragment>
-      <h1 className="inputTodo">Todo App</h1>
+      <h1 className="inputTodo">Daily To-do</h1>
       <form onSubmit={onSubmitForm}>
         <input
           type="text"
-          placeholder="Enter task"
+          placeholder="Add something..."
           value={description}
           onChange={(e) => setDescription(e.target.value)}
+          required
         ></input>
         <button>Add</button>
       </form>

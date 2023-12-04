@@ -35,8 +35,8 @@ const ListTodo = () => {
       <table className="table">
         <thead>
           <tr>
-            <th>Description</th>
-            <td>Done</td>
+            <th>Tasks List</th>
+            <td>Progress</td>
           </tr>
         </thead>
         {/* <tr>
@@ -49,7 +49,7 @@ const ListTodo = () => {
             <tr key={todo.todo_id}>
               <td>{todo.description}</td>
               <th>
-                <button onClick={() => deleteTodo(todo.todo_id)}>Delete</button>
+                <button onClick={() => deleteTodo(todo.todo_id)}>Complete</button>
               </th>
             </tr>
           ))}
